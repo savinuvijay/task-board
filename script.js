@@ -1,3 +1,7 @@
+import { TaskItem } from "./taskItemComponent.js";
+
+window.customElements.define("task-item", TaskItem);
+
 // let uniqueIdCount = 0;
 // let lists1 = [
 //     {
@@ -70,17 +74,17 @@ addListButton.addEventListener("click", (e) => {
 
     addItemBtn.addEventListener("click", (e) => {
         console.log(e);
-        let item = document.createElement("div");
-        item.className = "list-item";
-        item.draggable = true;
-        let deleteBtn = document.createElement("button");
-        deleteBtn.className = "delete-btn";
-        deleteBtn.innerHTML = "Delete -";
-        deleteBtn.addEventListener("click", (e) => {
-            console.log(e.path[1]);
-            items.removeChild(e.path[1]);
-        });
-        item.appendChild(deleteBtn);
+        let item = document.createElement("task-item");
+        // item.className = "list-item";
+        // item.draggable = true;
+        // let deleteBtn = document.createElement("button");
+        // deleteBtn.className = "delete-btn";
+        // deleteBtn.innerHTML = "Delete -";
+        // deleteBtn.addEventListener("click", (e) => {
+        //     console.log(e.path[1]);
+        //     items.removeChild(e.path[1]);
+        // });
+        // item.appendChild(deleteBtn);
         items.appendChild(item);
     });
 

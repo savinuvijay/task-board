@@ -48,13 +48,6 @@ body {
     justify-content: center;
 }
 
-.list-item {
-    margin: 5px 10px;
-    width: 90%;
-    height: 120px;
-    background: gold;
-}
-
 .add-item-btn {
     margin: 20px;
 }
