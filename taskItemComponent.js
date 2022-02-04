@@ -1,5 +1,5 @@
-const template = document.createElement("template");
-template.innerHTML = `
+const taskItemTemplate = document.createElement("template");
+taskItemTemplate.innerHTML = `
     <link rel="stylesheet" href="taskItemStyle.css" />
     <div class="task-item" draggable="true">
         <button class="delete-btn">Delete -</button>
@@ -10,7 +10,7 @@ export class TaskItem extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this.shadowRoot.appendChild(taskItemTemplate.content.cloneNode(true));
     }
 
     connectedCallback() {
