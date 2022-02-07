@@ -1,6 +1,8 @@
 import { TaskItem } from "./taskItemComponent.js";
+import { SwimLane } from "./swimLaneComponent.js";
 
 window.customElements.define("task-item", TaskItem);
+window.customElements.define("swim-lane", SwimLane);
 
 // let uniqueIdCount = 0;
 // let lists1 = [
@@ -36,76 +38,84 @@ let addListButton = document.querySelector(".add-list-btn");
 let listContainer = document.querySelector(".lists");
 addListButton.addEventListener("click", (e) => {
     console.log(e);
-    let list = document.createElement("div");
-    list.className = "list";
+    let list = document.createElement("swim-lane");
+    // let list = document.createElement("div");
+    // list.className = "list";
 
-    let items = document.createElement("div");
-    items.className = "items";
+    // let items = document.createElement("div");
+    // items.className = "items";
 
-    let listTitle = getListTitle();
+    // let listTitle = getListTitle();
 
-    listTitle.addEventListener("click", (e) => {
+    // listTitle.addEventListener("click", (e) => {
+    //     e.stopPropagation();
+    //     let listTitleInput = listTitle.querySelector(".list-title-input");
+    //     let listTitleOk = listTitle.querySelector(".list-title-ok");
+    //     let listTitleDisplay = listTitle.querySelector(".list-title-display");
+    //     console.log("e.target", e.target.className);
+    //     if (listTitleInput.hidden) {
+    //         console.log("editing");
+    //         listTitleInput.hidden = false;
+    //         listTitleOk.hidden = false;
+    //         listTitleDisplay.hidden = true;
+    //     } else {
+    //         console.log("display");
+    //         if (e.target.className !== "list-title-input") {
+    //             listTitleInput.hidden = true;
+    //             listTitleOk.hidden = true;
+    //             console.log(listTitleInput.value);
+    //             listTitleDisplay.hidden = false;
+    //             listTitleDisplay.innerHTML = listTitleInput.value;
+    //             console.log(listTitleDisplay.innerHTML);
+    //         }
+    //     }
+    // });
+
+    // let addItemBtn = document.createElement("button");
+    // addItemBtn.className = "add-item-btn";
+    // addItemBtn.innerHTML = "New +";
+
+    // addItemBtn.addEventListener("click", (e) => {
+    //     console.log(e);
+    //     let item = document.createElement("task-item");
+    //     // item.className = "list-item";
+    //     // item.draggable = true;
+    //     // let deleteBtn = document.createElement("button");
+    //     // deleteBtn.className = "delete-btn";
+    //     // deleteBtn.innerHTML = "Delete -";
+    //     // deleteBtn.addEventListener("click", (e) => {
+    //     //     console.log(e.path[1]);
+    //     //     items.removeChild(e.path[1]);
+    //     // });
+    //     // item.appendChild(deleteBtn);
+    //     items.appendChild(item);
+    // });
+
+    // list.appendChild(listTitle);
+    // list.appendChild(items);
+    // list.appendChild(addItemBtn);
+    let swimLane = list.shadowRoot.querySelector(".swim-lane");
+
+    swimLane.addEventListener("dragover", function (e) {
         e.stopPropagation();
-        let listTitleInput = listTitle.querySelector(".list-title-input");
-        let listTitleOk = listTitle.querySelector(".list-title-ok");
-        let listTitleDisplay = listTitle.querySelector(".list-title-display");
-        console.log("e.target", e.target.className);
-        if (listTitleInput.hidden) {
-            console.log("editing");
-            listTitleInput.hidden = false;
-            listTitleOk.hidden = false;
-            listTitleDisplay.hidden = true;
-        } else {
-            console.log("display");
-            if (e.target.className !== "list-title-input") {
-                listTitleInput.hidden = true;
-                listTitleOk.hidden = true;
-                console.log(listTitleInput.value);
-                listTitleDisplay.hidden = false;
-                listTitleDisplay.innerHTML = listTitleInput.value;
-                console.log(listTitleDisplay.innerHTML);
-            }
+        // console.log(e, this);
+        dropZone = e.target;
+        if (e.target.shadowRoot) {
+            //dropZone = e.target.shadowRoot.querySelector(".swim-lane");
         }
     });
 
-    let addItemBtn = document.createElement("button");
-    addItemBtn.className = "add-item-btn";
-    addItemBtn.innerHTML = "New +";
-
-    addItemBtn.addEventListener("click", (e) => {
-        console.log(e);
-        let item = document.createElement("task-item");
-        // item.className = "list-item";
-        // item.draggable = true;
-        // let deleteBtn = document.createElement("button");
-        // deleteBtn.className = "delete-btn";
-        // deleteBtn.innerHTML = "Delete -";
-        // deleteBtn.addEventListener("click", (e) => {
-        //     console.log(e.path[1]);
-        //     items.removeChild(e.path[1]);
-        // });
-        // item.appendChild(deleteBtn);
-        items.appendChild(item);
-    });
-
-    list.appendChild(listTitle);
-    list.appendChild(items);
-    list.appendChild(addItemBtn);
-
-    list.addEventListener("dragover", function (e) {
+    swimLane.addEventListener("dragend", function (e) {
         e.stopPropagation();
-        //console.log(e, this);
-        dropZone = e.target;
-    });
-
-    list.addEventListener("dragend", function (e) {
-        e.stopPropagation();
-        console.log(e.target);
+        // let DragParent = e.target.shadowRoot.querySelector(".swim-lane");
+        // console.log("DragParent", DragParent);
         let item = e.target;
-        console.log(dropZone.className);
+        // console.log("item", e.target);
+        // console.log("dropZone", dropZone);
+        // console.log("e.target.parentNode", e.target.parentNode);
         let oldItems = e.target.parentNode;
-        if (dropZone.className === "list") {
-            let newItems = dropZone.querySelector(".items");
+        if (dropZone.className === "swim-lane") {
+            let newItems = dropZone.querySelector(".tasks");
             console.log(newItems);
             oldItems.removeChild(item);
             console.log(oldItems);

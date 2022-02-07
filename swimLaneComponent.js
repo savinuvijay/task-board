@@ -27,6 +27,10 @@ export class SwimLane extends HTMLElement {
 
     addTask() {
         console.log("this.parentNode", this.parentNode);
+        //console.log(e);
+        let tasks = this.shadowRoot.querySelector(".tasks");
+        let taskItem = document.createElement("task-item");
+        tasks.appendChild(taskItem);
         //this.parentNode.removeChild(this);
     }
 
