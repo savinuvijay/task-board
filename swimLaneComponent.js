@@ -41,22 +41,39 @@ export class SwimLane extends HTMLElement {
                 titleDisplay.hidden = true;
             });
         this.shadowRoot
+            .querySelector(".title-ok")
+            .addEventListener("click", (e) => {
+                e.stopPropagation();
+                let swimLaneTitle =
+                    this.shadowRoot.querySelector(".swim-lane-title");
+                console.log("swimLaneTitle", swimLaneTitle);
+                let titleInput = swimLaneTitle.querySelector(".title-input");
+                let titleOk = swimLaneTitle.querySelector(".title-ok");
+                let titleDisplay =
+                    swimLaneTitle.querySelector(".title-display");
+
+                titleDisplay.innerHTML = titleInput.value;
+
+                titleInput.hidden = true;
+                titleOk.hidden = true;
+                titleDisplay.hidden = false;
+            });
+        this.shadowRoot
+            .querySelector(".swim-lane")
+            .addEventListener("dragover", function (e) {
+                e.stopPropagation();
+                SwimLane.dropZone = e.target;
+            });
+        this.shadowRoot
             .querySelector(".swim-lane")
             .addEventListener("dragend", function (e) {
                 e.stopPropagation();
-                // let DragParent = e.target.shadowRoot.querySelector(".swim-lane");
-                // console.log("DragParent", DragParent);
-                // console.log("dropZone", SwimLane.dropZone);
-                // console.log("item", e.target);
-                // console.log("e.target.parentNode", e.target.parentNode);
                 let dropZone = SwimLane.dropZone;
                 let item = e.target;
                 let oldItems = e.target.parentNode;
                 if (dropZone.className === "swim-lane") {
                     let newItems = dropZone.querySelector(".tasks");
-                    //console.log(newItems);
                     oldItems.removeChild(item);
-                    //console.log(oldItems);
                     newItems.appendChild(item);
                 }
             });
@@ -64,11 +81,9 @@ export class SwimLane extends HTMLElement {
 
     addTask() {
         console.log("this.parentNode", this.parentNode);
-        //console.log(e);
         let tasks = this.shadowRoot.querySelector(".tasks");
         let taskItem = document.createElement("task-item");
         tasks.appendChild(taskItem);
-        //this.parentNode.removeChild(this);
     }
 
     disconnectedCallback() {
