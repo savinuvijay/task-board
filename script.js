@@ -98,30 +98,30 @@ addListButton.addEventListener("click", (e) => {
 
     swimLane.addEventListener("dragover", function (e) {
         e.stopPropagation();
-        // console.log(e, this);
+        //console.log(e, this);
         dropZone = e.target;
-        if (e.target.shadowRoot) {
-            //dropZone = e.target.shadowRoot.querySelector(".swim-lane");
-        }
+        SwimLane.dropZone = e.target;
+        //console.log(document.querySelectorAll("swim-lane"));
     });
 
-    swimLane.addEventListener("dragend", function (e) {
-        e.stopPropagation();
-        // let DragParent = e.target.shadowRoot.querySelector(".swim-lane");
-        // console.log("DragParent", DragParent);
-        let item = e.target;
-        // console.log("item", e.target);
-        // console.log("dropZone", dropZone);
-        // console.log("e.target.parentNode", e.target.parentNode);
-        let oldItems = e.target.parentNode;
-        if (dropZone.className === "swim-lane") {
-            let newItems = dropZone.querySelector(".tasks");
-            console.log(newItems);
-            oldItems.removeChild(item);
-            console.log(oldItems);
-            newItems.appendChild(item);
-        }
-    });
+    // swimLane.addEventListener("dragend", function (e) {
+    //     e.stopPropagation();
+    //     // let DragParent = e.target.shadowRoot.querySelector(".swim-lane");
+    //     // console.log("DragParent", DragParent);
+    //     let item = e.target;
+    //     console.log("e", e);
+    //     console.log("item", e.target);
+    //     // console.log("dropZone", dropZone);
+    //     console.log("e.target.parentNode", e.target.parentNode);
+    //     let oldItems = e.target.parentNode;
+    //     if (dropZone.className === "swim-lane") {
+    //         let newItems = dropZone.querySelector(".tasks");
+    //         //console.log(newItems);
+    //         oldItems.removeChild(item);
+    //         //console.log(oldItems);
+    //         newItems.appendChild(item);
+    //     }
+    // });
 
     listContainer.appendChild(list);
     //console.log(this);
