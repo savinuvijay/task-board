@@ -11,16 +11,15 @@ export class TaskItem extends HTMLElement {
         super();
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(taskItemTemplate.content.cloneNode(true));
+        this.deleteBtn = this.shadowRoot.querySelector(".delete-btn");
     }
 
     connectedCallback() {
-        this.shadowRoot
-            .querySelector(".delete-btn")
-            .addEventListener("click", () => this.deleteTask());
+        this.deleteBtn.addEventListener("click", () => this.deleteTask());
     }
 
     deleteTask() {
-        console.log("this.parentNode", this.parentNode);
+        //console.log("this.parentNode", this.parentNode);
         this.parentNode.removeChild(this);
     }
 
