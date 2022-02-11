@@ -15,9 +15,10 @@ swimLaneTemplate.innerHTML = `
 export class SwimLane extends HTMLElement {
     constructor() {
         super();
-        this.dropZone = null;
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(swimLaneTemplate.content.cloneNode(true));
+
+        this.dropZone = null;
 
         this.swimLane = this.shadowRoot.querySelector(".swim-lane");
 
@@ -28,6 +29,12 @@ export class SwimLane extends HTMLElement {
 
         this.tasks = this.swimLane.querySelector(".tasks");
         this.addTaskBtn = this.swimLane.querySelector(".add-task-btn");
+
+        this.details = { parent: null, dropZone: null, task: null };
+
+        this.taskDropEvent = new CustomEvent("taskdrop", {
+            detail: this.details,
+        });
     }
 
     connectedCallback() {
@@ -40,6 +47,7 @@ export class SwimLane extends HTMLElement {
 
     addTask(e) {
         e.stopPropagation();
+
         let taskItem = document.createElement("task-item");
         this.tasks.appendChild(taskItem);
     }
@@ -72,11 +80,14 @@ export class SwimLane extends HTMLElement {
         let dropZone = SwimLane.dropZone;
         let task = e.target;
         let parentTasks = e.target.parentNode;
-        console.log("dropZone", dropZone);
+        this.details.parent = parentTasks;
+        this.details.dropZone = dropZone;
+        this.details.task = task;
         if (dropZone.className === "swim-lane") {
             let dropZoneTasks = dropZone.querySelector(".tasks");
             parentTasks.removeChild(task);
             dropZoneTasks.appendChild(task);
+            this.dispatchEvent(this.taskDropEvent);
         }
     }
 

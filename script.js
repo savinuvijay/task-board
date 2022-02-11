@@ -35,6 +35,11 @@ window.customElements.define("swim-lane", SwimLane);
 let addListButton = document.querySelector(".add-swim-lane-btn");
 let listContainer = document.querySelector(".swim-lanes");
 addListButton.addEventListener("click", (e) => {
+    e.stopPropagation();
     let list = document.createElement("swim-lane");
+    list.addEventListener("taskdrop", function (e) {
+        console.log("listend to task drop event");
+        console.log(e.detail);
+    });
     listContainer.appendChild(list);
 });
