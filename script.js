@@ -41,5 +41,9 @@ addListButton.addEventListener("click", (e) => {
         console.log("listend to task drop event");
         console.log(e.detail);
     });
+    list.addEventListener("taskadd", function (e) {
+        console.log("listend to task add event");
+        console.log(e.detail);
+    });
     listContainer.appendChild(list);
 });
