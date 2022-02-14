@@ -19,6 +19,7 @@ export class SwimLane extends HTMLElement {
         this.shadowRoot.appendChild(swimLaneTemplate.content.cloneNode(true));
 
         this.dropZone = null;
+        this.taskIdCount = 0;
 
         this.swimLane = this.shadowRoot.querySelector(".swim-lane");
 
@@ -53,6 +54,7 @@ export class SwimLane extends HTMLElement {
         e.stopPropagation();
 
         let taskItem = document.createElement("task-item");
+        taskItem.id = `${this.id}_${this.taskIdCount++}`;
         this.tasks.appendChild(taskItem);
         this.details.parent = this.tasks.parentNode;
         this.details.dropZone = null;
