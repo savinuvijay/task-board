@@ -1,7 +1,7 @@
 const swimLaneTemplate = document.createElement("template");
 swimLaneTemplate.innerHTML = `
     <link rel="stylesheet" href="swimLaneStyle.css" />
-    <div class="swim-lane">
+    <div class="swim-lane-container">
       <div class="swim-lane-title">
         <input class="title-input" hidden type="text" value="New"/>
         <button class="title-ok" hidden>ok</button>
@@ -18,7 +18,7 @@ export class SwimLane extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(swimLaneTemplate.content.cloneNode(true));
 
-        this.swimLane = this.shadowRoot.querySelector(".swim-lane");
+        this.swimLane = this.shadowRoot.querySelector(".swim-lane-container");
 
         this.swimLaneTitle = this.swimLane.querySelector(".swim-lane-title");
         this.titleInput = this.swimLaneTitle.querySelector(".title-input");
@@ -82,6 +82,7 @@ export class SwimLane extends HTMLElement {
     setDropZone(e) {
         e.stopPropagation();
         SwimLane.dropZone = e.target;
+        //console.log(e.target.parentNode.host);
     }
 
     dropTask(e) {
@@ -92,7 +93,7 @@ export class SwimLane extends HTMLElement {
         this.details.parent = parentTasks.parentNode;
         this.details.dropZone = dropZone;
         this.details.task = task;
-        if (dropZone.className === "swim-lane") {
+        if (dropZone.className === "swim-lane-container") {
             let dropZoneTasks = dropZone.querySelector(".tasks");
             parentTasks.removeChild(task);
             dropZoneTasks.appendChild(task);
