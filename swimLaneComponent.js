@@ -37,6 +37,10 @@ export class SwimLane extends HTMLElement {
         this.taskAddEvent = new CustomEvent("taskadd", {
             detail: this.details,
         });
+
+        this.taskDeleteEvent = new CustomEvent("taskdelete", {
+            detail: this.details,
+        });
     }
 
     connectedCallback() {
@@ -59,6 +63,11 @@ export class SwimLane extends HTMLElement {
         this.details.dropZone = null;
         this.details.task = taskItem;
         this.dispatchEvent(this.taskAddEvent);
+
+        taskItem.addEventListener("taskdelete", (e) => {
+            this.details = e.detail;
+            this.dispatchEvent(this.taskDeleteEvent);
+        });
     }
 
     editTitle(e) {

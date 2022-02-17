@@ -12,15 +12,21 @@ export class TaskItem extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(taskItemTemplate.content.cloneNode(true));
         this.deleteBtn = this.shadowRoot.querySelector(".delete-btn");
+
+        this.taskDeleteEvent = new CustomEvent("taskdelete", {});
     }
 
     connectedCallback() {
-        this.deleteBtn.addEventListener("click", () => this.deleteTask());
+        this.deleteBtn.addEventListener("click", (e) => this.deleteTask(e));
     }
 
-    deleteTask() {
+    deleteTask(e) {
         //console.log("this.parentNode", this.parentNode);
         this.parentNode.removeChild(this);
+        // this.details.parent = this;
+        // this.details.dropZone = null;
+        // this.details.task = e;
+        this.dispatchEvent(this.taskDeleteEvent);
     }
 
     disconnectedCallback() {

@@ -45,7 +45,7 @@ addSwimLaneButton.addEventListener("click", (e) => {
         tasks: [],
     });
     console.log(state);
-    swimLane.addEventListener("taskdrop", function (e) {
+    swimLane.addEventListener("taskdrop", (e) => {
         console.log("listend to task drop event");
         console.log(e.detail);
         let parentSwimLane = e.detail.parent.parentNode.host;
@@ -55,7 +55,7 @@ addSwimLaneButton.addEventListener("click", (e) => {
         console.log("dropZone", dropZone);
         console.log("task", task);
     });
-    swimLane.addEventListener("taskadd", function (e) {
+    swimLane.addEventListener("taskadd", (e) => {
         console.log("listend to task add event");
         console.log(e.detail);
         let parentSwimLane = e.detail.parent.parentNode.host;
@@ -68,6 +68,11 @@ addSwimLaneButton.addEventListener("click", (e) => {
             id: task.id,
         });
         console.log(state);
+    });
+
+    swimLane.addEventListener("taskdelete", (e) => {
+        console.log("listend to task drop event");
+        console.log(e.detail);
     });
     listContainer.appendChild(swimLane);
 });
