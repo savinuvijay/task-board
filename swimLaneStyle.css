@@ -2,11 +2,13 @@
     padding: 10px;
     margin: 10px;
     min-width: 200px;
-    height: 500px;
+    height: 85vh;
     background: #1aa;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
+    overflow: auto;
 }
 .swim-lane-title {
     display: flex;
