@@ -2,7 +2,7 @@ const taskItemTemplate = document.createElement("template");
 taskItemTemplate.innerHTML = `
     <link rel="stylesheet" href="taskItemStyle.css" />
     <div class="task-item" draggable="true">
-        <button class="delete-btn">Delete -</button>
+        <button class="delete-btn">Delete</button>
     </div>
 `;
 

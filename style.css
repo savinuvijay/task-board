@@ -1,6 +1,14 @@
-body {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    background: #333;
+    font-family: "monserrat", sans-serif;
+    overflow-x: hidden;
+    color: #fff;
 }
 .container {
     display: flex;
@@ -20,4 +28,23 @@ body {
     align-items: center;
     justify-content: center;
     width: 60%;
+}
+
+button {
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    border-style: none;
+    background: #fff;
+    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem,
+        rgba(2, 8, 20, 0.3) 0px 0.075rem 0.175rem;
+    display: inline;
+}
+
+button:hover {
+    background: #eee;
+}
+
+button:active {
+    background: #ddd;
 }

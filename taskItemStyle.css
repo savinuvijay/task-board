@@ -9,4 +9,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem,
+        rgba(2, 8, 20, 0.3) 0px 0.075rem 0.175rem;
+}
+
+button {
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    border-style: none;
+    background: #fff;
+    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem,
+        rgba(2, 8, 20, 0.3) 0px 0.075rem 0.175rem;
+    display: inline;
+    /* transition: all 200ms; */
+}
+
+button:hover {
+    background: #eee;
+}
+
+button:active {
+    background: #ddd;
 }
