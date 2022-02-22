@@ -5,10 +5,10 @@
 }
 
 body {
-    background: #333;
+    background: #203239;
+    color: #141e27;
     font-family: "monserrat", sans-serif;
     overflow-x: hidden;
-    color: #fff;
 }
 .container {
     display: flex;

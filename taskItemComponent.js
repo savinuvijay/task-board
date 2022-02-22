@@ -2,6 +2,7 @@ const taskItemTemplate = document.createElement("template");
 taskItemTemplate.innerHTML = `
     <link rel="stylesheet" href="taskItemStyle.css" />
     <div class="task-item" draggable="true">
+        <textarea class="task-details"></textarea>
         <button class="delete-btn">Delete</button>
     </div>
 `;

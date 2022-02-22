@@ -2,8 +2,8 @@
     padding: 10px;
     margin: 10px;
     min-width: 200px;
-    height: 85vh;
-    background: #18a;
+    height: 100%;
+    background: #e0ddaa;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,11 +16,15 @@
 }
 
 .title-input {
-    margin: 0 0px;
+    border-style: none;
+    border-radius: 3px;
+    margin-right: 5px;
+    text-align: center;
+    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem;
 }
 
 .title-display {
-    margin: 0 0px;
+    font-weight: 600;
 }
 
 .title-ok {
@@ -29,8 +33,7 @@
     font-weight: 600;
     border-style: none;
     background: #fff;
-    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem,
-        rgba(2, 8, 20, 0.3) 0px 0.075rem 0.175rem;
+    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem;
     display: hidden;
 }
 
@@ -48,8 +51,7 @@
     font-weight: 600;
     border-style: none;
     background: #fff;
-    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem,
-        rgba(2, 8, 20, 0.3) 0px 0.075rem 0.175rem;
+    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem;
     display: inline;
 }
 
