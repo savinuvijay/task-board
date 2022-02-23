@@ -4,9 +4,20 @@
     padding: 0;
 }
 
+:root {
+    --background-color: #203239;
+    --swim-lane-color: #e0ddaa;
+    --task-color: #eeedde;
+    --text-color: #141e27;
+    --button-hover: #eee;
+    --button-active: #ddd;
+    --white: #ffffff;
+    --shadow: rgba(3, 8, 20, 0.2) 0px 0.15rem 0.5rem;
+}
+
 body {
-    background: #203239;
-    color: #141e27;
+    background: var(--background-color);
+    color: var(--text-color);
     font-family: "monserrat", sans-serif;
     overflow-x: hidden;
 }
@@ -35,16 +46,24 @@ button {
     border-radius: 3px;
     font-weight: 600;
     border-style: none;
-    background: #fff;
-    box-shadow: rgba(3, 8, 20, 0.3) 0px 0.15rem 0.5rem,
-        rgba(2, 8, 20, 0.3) 0px 0.075rem 0.175rem;
+    background: var(--white);
+    box-shadow: var(--shadow);
     display: inline;
 }
 
 button:hover {
-    background: #eee;
+    background: var(--button-hover);
 }
 
 button:active {
-    background: #ddd;
+    background: var(--button-active);
+}
+
+.add-swim-lane-btn {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: 500;
+    font-size: 1.2rem;
 }

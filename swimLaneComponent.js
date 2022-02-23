@@ -8,7 +8,7 @@ swimLaneTemplate.innerHTML = `
         <span class="title-display" >New</span>
       </div>
       <div class=tasks></div>
-      <button class="add-task-btn">Add Task</button>
+      <button class="add-task-btn">+</button>
     </div>
 `;
 
