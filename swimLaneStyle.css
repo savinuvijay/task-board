@@ -34,7 +34,6 @@
     border-style: none;
     background: var(--white);
     box-shadow: var(--shadow);
-    display: hidden;
 }
 
 .tasks {
