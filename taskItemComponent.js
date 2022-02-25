@@ -6,6 +6,7 @@ taskItemTemplate.innerHTML = `
             <input class="title-input" type="text" value="New"/>
             <button class="title-ok">ok</button>
             <span class="title-display" >New</span>
+            <div class="handle">◉</div>
         </div>
         <textarea class="task-details"></textarea>
         <button class="delete-btn">Delete</button>
@@ -32,6 +33,18 @@ export class TaskItem extends HTMLElement {
         this.deleteBtn = this.taskItem.querySelector(".delete-btn");
 
         this.taskDeleteEvent = new CustomEvent("taskdelete", {});
+
+        let mouseDownEl;
+
+        this.taskItem.onmousedown = function (evt) {
+            mouseDownEl = evt.target;
+        };
+
+        this.taskItem.ondragstart = function (evt) {
+            if (!mouseDownEl.matches(".handle")) {
+                evt.preventDefault();
+            }
+        };
     }
 
     connectedCallback() {
