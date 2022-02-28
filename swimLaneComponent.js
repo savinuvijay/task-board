@@ -99,7 +99,7 @@ export class SwimLane extends HTMLElement {
         let dropZone = SwimLane.dropZone;
         let task = e.target;
         let parentTasks = e.target.parentNode;
-        this.details.parent = parentTasks.parentNode;
+        //this.details.parent = parentTasks.parentNode;
         this.details.dropZone = dropZone;
         this.details.task = task;
         if (dropZone.className === "swim-lane-container") {
