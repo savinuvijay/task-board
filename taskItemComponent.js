@@ -18,6 +18,7 @@ export class TaskItem extends HTMLElement {
         super();
         this.attachShadow({ mode: "open" });
         this.editingTitle = false;
+        this.mouseDownEl = null;
         this.shadowRoot.appendChild(taskItemTemplate.content.cloneNode(true));
 
         this.taskItem = this.shadowRoot.querySelector(".task-item");
@@ -35,32 +36,30 @@ export class TaskItem extends HTMLElement {
     }
 
     connectedCallback() {
-        let mouseDownEl;
-
-        this.taskItem.onmousedown = (evt) => {
-            mouseDownEl = evt.target;
-            console.log("click", mouseDownEl);
-            if (!mouseDownEl.matches(".title-input") && this.editingTitle) {
-                this.saveTitle(evt);
-            }
-        };
-
-        this.taskItem.ondragstart = (evt) => {
-            if (!mouseDownEl.matches(".task-title")) {
-                evt.preventDefault();
-            }
-        };
-
+        this.taskItem.addEventListener("mousedown", (e) => this.taskClicked(e));
+        this.taskItem.addEventListener("dragstart", (e) => this.taskDragged(e));
         this.titleDisplay.addEventListener("click", (e) => this.editTitle(e));
         this.deleteBtn.addEventListener("click", (e) => this.deleteTask(e));
     }
 
+    taskClicked(e) {
+        this.mouseDownEl = e.target;
+        console.log("click", this.mouseDownEl);
+        if (!this.mouseDownEl.matches(".title-input") && this.editingTitle) {
+            this.saveTitle(e);
+        }
+    }
+
+    taskDragged(e) {
+        if (!this.mouseDownEl.matches(".task-title")) {
+            e.preventDefault();
+        }
+    }
+
     deleteTask(e) {
-        //console.log("this.parentNode", this.parentNode);
-        this.parentNode.removeChild(this);
-        // this.details.parent = this;
-        // this.details.dropZone = null;
-        // this.details.task = e;
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
         this.dispatchEvent(this.taskDeleteEvent);
     }
 
@@ -81,6 +80,7 @@ export class TaskItem extends HTMLElement {
     }
 
     disconnectedCallback() {
+        console.log("disconnectedCallback", this.shadowRoot);
         //this.shadowRoot.querySelector(".delete-btn").removeEventListener();
     }
 }

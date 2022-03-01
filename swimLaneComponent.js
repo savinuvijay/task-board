@@ -59,6 +59,9 @@ export class SwimLane extends HTMLElement {
         taskItem.id = SwimLane.taskIdCount++;
 
         this.tasks.appendChild(taskItem);
+        if (!this.details) {
+            this.details = { parent: null, dropZone: null, task: null };
+        }
         this.details.parent = this.tasks.parentNode;
         this.details.dropZone = null;
         this.details.task = taskItem;
@@ -99,7 +102,12 @@ export class SwimLane extends HTMLElement {
         let dropZone = SwimLane.dropZone;
         let task = e.target;
         let parentTasks = e.target.parentNode;
-        //this.details.parent = parentTasks.parentNode;
+
+        if (!this.details) {
+            this.details = { parent: null, dropZone: null, task: null };
+        }
+
+        this.details.parent = parentTasks.parentNode;
         this.details.dropZone = dropZone;
         this.details.task = task;
         if (dropZone.className === "swim-lane-container") {

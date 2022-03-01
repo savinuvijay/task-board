@@ -39,13 +39,13 @@ button:active {
     margin-right: 10px;
     margin-bottom: 3px;
     text-align: center;
-    background: var(--task-color);
-    box-shadow: var(--shadow);
+    background: var(--swim-lane-color);
+    /* box-shadow: var(--shadow); */
     font-size: small;
 }
 
 .delete-btn:hover {
-    background: var(--button-hover);
+    background: var(--task-color);
 }
 
 .delete-btn:active {

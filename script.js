@@ -58,15 +58,19 @@ addSwimLaneButton.addEventListener("click", (e) => {
     swimLane.addEventListener("taskadd", (e) => {
         console.log("listend to task add event");
         console.log(e.detail);
-        let parentSwimLane = e.detail.parent.parentNode.host;
-        let task = e.detail.task;
-        console.log("Parent", parentSwimLane);
-        console.log("task", task);
+        if (e.detail.parent?.parentNode) {
+            let parentSwimLane = e.detail.parent.parentNode.host;
+            let task = e.detail.task;
+            console.log("Parent", parentSwimLane);
+            console.log("task", task);
 
-        let parentSwimLaneState = state.find((s) => s.id === parentSwimLane.id);
-        parentSwimLaneState.tasks.push({
-            id: task.id,
-        });
+            let parentSwimLaneState = state.find(
+                (s) => s.id === parentSwimLane.id
+            );
+            parentSwimLaneState.tasks.push({
+                id: task.id,
+            });
+        }
         console.log(state);
     });
 
