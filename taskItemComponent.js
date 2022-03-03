@@ -44,7 +44,6 @@ export class TaskItem extends HTMLElement {
 
     taskClicked(e) {
         this.mouseDownEl = e.target;
-        console.log("click", this.mouseDownEl);
         if (!this.mouseDownEl.matches(".title-input") && this.editingTitle) {
             this.saveTitle(e);
         }
