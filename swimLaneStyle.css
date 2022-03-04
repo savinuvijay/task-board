@@ -3,7 +3,7 @@
     margin: 10px;
     min-width: 200px;
     height: 100%;
-    background: var(--swim-lane-color);
+    background: var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,15 +44,16 @@
     font-size: 1.2rem;
     margin: 20px;
     border-style: none;
-    background: var(--white);
+    color: var(--primary-color);
+    background: var(--accent-color);
     box-shadow: var(--shadow);
     display: inline;
 }
 
 .add-task-btn:hover {
-    background: var(--button-hover);
+    background: var(--button-accent-hover);
 }
 
 .add-task-btn:active {
-    background: var(--button-active);
+    background: var(--button-accent-active);
 }

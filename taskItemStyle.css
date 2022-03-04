@@ -2,8 +2,8 @@
     margin: 5px 10px;
     width: 90%;
     height: 100%;
-    background: var(--task-color);
-    border-radius: 5px;
+    background: var(--primary-color);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,21 +31,24 @@ button:active {
 }
 
 .delete-btn {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     padding: 5px;
     border-radius: 50%;
     margin-left: auto;
     margin-right: 10px;
     margin-bottom: 3px;
     text-align: center;
-    background: var(--swim-lane-color);
+    color: var(--text-color);
+    background: var(--primary-color);
+    font-weight: bold;
     /* box-shadow: var(--shadow); */
-    font-size: small;
+    font-size: 0.7rem;
+    font-weight: 700;
 }
 
 .delete-btn:hover {
-    background: var(--task-color);
+    background: var(--primary-color);
 }
 
 .delete-btn:active {
@@ -61,10 +64,12 @@ button:active {
 }
 
 .task-title {
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     padding-top: 5px;
     display: flex;
     width: 100%;
+    background: var(--accent-color);
+    color: var(--primary-color);
 }
 
 .title-input {
@@ -80,12 +85,4 @@ button:active {
 .title-display {
     margin-left: 10px;
     font-weight: 600;
-}
-
-.title-ok {
-    padding: 5px 10px;
-    font-weight: 600;
-    border-style: none;
-    background: var(--white);
-    box-shadow: var(--shadow);
 }

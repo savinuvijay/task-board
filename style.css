@@ -5,12 +5,14 @@
 }
 
 :root {
-    --background-color: #203239;
-    --swim-lane-color: #e0ddaa;
-    --task-color: #eeedde;
-    --text-color: #141e27;
+    --background-color: #000035;
+    --primary-color: #f1f1f1;
+    --accent-color: #0000ff;
+    --text-color: #000035;
     --button-hover: #eee;
     --button-active: #ddd;
+    --button-accent-hover: #0000ba;
+    --button-accent-active: #000090;
     --white: #ffffff;
     --shadow: rgba(3, 8, 20, 0.2) 0px 0.15rem 0.5rem;
 }
@@ -46,7 +48,7 @@ button {
     border-radius: 3px;
     font-weight: 600;
     border-style: none;
-    background: var(--white);
+    background: var(--primary-color);
     box-shadow: var(--shadow);
     display: inline;
 }

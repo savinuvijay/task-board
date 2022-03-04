@@ -3,7 +3,7 @@ taskItemTemplate.innerHTML = `
     <link rel="stylesheet" href="taskItemStyle.css" />
     <script src="https://kit.fontawesome.com/f0cb7bd73f.js" crossorigin="anonymous"></script>
     <div class="task-item" draggable="true">
-        <div class="task-title" style="background: white;">
+        <div class="task-title">
             <input class="title-input" type="text" value="New"/>
             <span class="title-display" >New</span>
             <div class="delete-btn">X</div>
