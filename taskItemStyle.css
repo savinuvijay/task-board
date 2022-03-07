@@ -19,7 +19,7 @@ button {
     background: var(--white);
     box-shadow: var(--shadow);
     display: inline;
-    /* transition: all 200ms; */
+    transition: all 200ms;
 }
 
 button:hover {
@@ -79,7 +79,11 @@ button:active {
     width: 70%;
     height: 20px;
     box-shadow: var(--shadow);
+    background: rgba(241, 241, 241, 0.3);
+    color: var(--primary-color);
+    border-style: none;
     user-select: text;
+    font-weight: bold;
 }
 
 .title-display {

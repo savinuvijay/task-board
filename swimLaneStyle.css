@@ -1,5 +1,5 @@
 .swim-lane-container {
-    padding: 10px;
+    padding: 5px;
     margin: 10px;
     min-width: 200px;
     height: 100%;
@@ -19,7 +19,7 @@
 .title-input {
     border-style: none;
     border-radius: 3px;
-    margin-right: 5px;
+    font-weight: bold;
     text-align: center;
     height: 20px;
     box-shadow: var(--shadow);
@@ -48,10 +48,12 @@
     background: var(--accent-color);
     box-shadow: var(--shadow);
     display: inline;
+    transition: all 500ms;
 }
 
 .add-task-btn:hover {
     background: var(--button-accent-hover);
+    transform: rotate(90deg);
 }
 
 .add-task-btn:active {

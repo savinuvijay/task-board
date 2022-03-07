@@ -51,10 +51,12 @@ button {
     background: var(--primary-color);
     box-shadow: var(--shadow);
     display: inline;
+    transition: all 500ms;
 }
 
 button:hover {
     background: var(--button-hover);
+    transform: rotate(90deg);
 }
 
 button:active {
