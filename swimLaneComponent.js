@@ -78,7 +78,12 @@ export class SwimLane extends HTMLElement {
         this.dispatchEvent(this.taskAddEvent);
 
         taskItem.addEventListener("taskdelete", (e) => {
-            this.details = e.detail;
+            if (!e.target) {
+                this.details.task = e.querySelector(".taskItem");
+                console.log("taskdelete", e.querySelector(".taskItem"));
+            } else {
+                this.details.task = e.target;
+            }
             this.dispatchEvent(this.taskDeleteEvent);
         });
     }
@@ -103,8 +108,9 @@ export class SwimLane extends HTMLElement {
 
     setDropZone(e) {
         e.stopPropagation();
-        SwimLane.dropZone = e.target;
-        //console.log(e.target.parentNode.host);
+        SwimLane.dropZone = e.path.find((p) => p.localName === "swim-lane");
+        //console.log(e.path.find((p) => p.localName === "swim-lane"));
+        //console.log(e.target);
     }
 
     dropTask(e) {
@@ -120,8 +126,9 @@ export class SwimLane extends HTMLElement {
         this.details.parent = parentTasks.parentNode;
         this.details.dropZone = dropZone;
         this.details.task = task;
-        if (dropZone.className === "swim-lane-container") {
-            let dropZoneTasks = dropZone.querySelector(".tasks");
+        console.log(dropZone.shadowRoot);
+        if (dropZone.localName === "swim-lane") {
+            let dropZoneTasks = dropZone.shadowRoot.querySelector(".tasks");
             parentTasks.removeChild(task);
             dropZoneTasks.appendChild(task);
             this.dispatchEvent(this.taskDropEvent);

@@ -46,23 +46,31 @@ addSwimLaneButton.addEventListener("click", (e) => {
     });
     console.log(state);
     swimLane.addEventListener("taskdrop", (e) => {
-        console.log("listend to task drop event");
-        console.log(e.detail);
+        //console.log("listend to task drop event");
+        //console.log(e.detail);
         let parentSwimLane = e.detail.parent.parentNode.host;
-        let dropZone = e.detail.dropZone.parentNode.host;
+        let dropZone = e.detail.dropZone;
         let task = e.detail.task;
-        console.log("Parent", parentSwimLane);
-        console.log("dropZone", dropZone);
-        console.log("task", task);
+        //console.log("Parent", parentSwimLane, parentSwimLane.id);
+        //console.log("dropZone", dropZone, dropZone.id);
+        //console.log("task", task, task.id);
+        let parentSwimLaneState = state.find((s) => s.id === parentSwimLane.id);
+        let taskItem = parentSwimLaneState.tasks.find((t) => t.id === task.id);
+        let dropZoneState = state.find((s) => s.id === dropZone.id);
+        dropZoneState.tasks.push(taskItem);
+        parentSwimLaneState.tasks = parentSwimLaneState.tasks.filter(
+            (t) => t.id !== task.id
+        );
+        console.log(state);
     });
     swimLane.addEventListener("taskadd", (e) => {
-        console.log("listend to task add event");
-        console.log(e.detail);
+        //console.log("listend to task add event");
+        //console.log(e.detail);
         if (e.detail.parent?.parentNode) {
             let parentSwimLane = e.detail.parent.parentNode.host;
             let task = e.detail.task;
-            console.log("Parent", parentSwimLane);
-            console.log("task", task);
+            //console.log("Parent", parentSwimLane);
+            //console.log("task", task);
 
             let parentSwimLaneState = state.find(
                 (s) => s.id === parentSwimLane.id
@@ -75,7 +83,7 @@ addSwimLaneButton.addEventListener("click", (e) => {
     });
 
     swimLane.addEventListener("taskdelete", (e) => {
-        console.log("listend to task drop event");
+        console.log("listend to task delete event");
         console.log(e.detail);
     });
     listContainer.appendChild(swimLane);
