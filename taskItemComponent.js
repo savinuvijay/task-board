@@ -1,3 +1,5 @@
+import { TaskBoardDataService } from "./taskBoardDataService.js";
+
 const taskItemTemplate = document.createElement("template");
 taskItemTemplate.innerHTML = `
     <link rel="stylesheet" href="taskItemStyle.css" />
@@ -32,7 +34,11 @@ export class TaskItem extends HTMLElement {
 
         this.deleteBtn = this.taskItem.querySelector(".delete-btn");
 
-        this.taskDeleteEvent = new CustomEvent("taskdelete", {});
+        // this.detail = { parent: null };
+
+        // this.taskDeleteEvent = new CustomEvent("taskdelete", {
+        //     detail: this.detail,
+        // });
     }
 
     connectedCallback() {
@@ -56,10 +62,14 @@ export class TaskItem extends HTMLElement {
     }
 
     deleteTask(e) {
+        e.stopPropagation();
         if (this.parentNode) {
+            // this.detail.parent = this.parentNode;
+            let parentSwimLane = this.parentNode.parentNode.parentNode.host;
+            TaskBoardDataService.deleteTask(parentSwimLane, this);
             this.parentNode.removeChild(this);
+            //this.dispatchEvent(this.taskDeleteEvent);
         }
-        this.dispatchEvent(this.taskDeleteEvent);
     }
 
     editTitle(e) {
@@ -79,7 +89,7 @@ export class TaskItem extends HTMLElement {
     }
 
     disconnectedCallback() {
-        console.log("disconnectedCallback", this.shadowRoot);
+        //console.log("disconnectedCallback", this.shadowRoot);
         //this.shadowRoot.querySelector(".delete-btn").removeEventListener();
     }
 }

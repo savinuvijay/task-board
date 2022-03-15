@@ -1,3 +1,5 @@
+import { TaskBoardDataService } from "./taskBoardDataService.js";
+
 const swimLaneTemplate = document.createElement("template");
 swimLaneTemplate.innerHTML = `
     <link rel="stylesheet" href="swimLaneStyle.css" />
@@ -18,7 +20,7 @@ export class SwimLane extends HTMLElement {
         this.shadowRoot.appendChild(swimLaneTemplate.content.cloneNode(true));
 
         this.editingTitle = false;
-        this.mouseDownEl = null;
+        // this.mouseDownEl = null;
 
         this.swimLane = this.shadowRoot.querySelector(".swim-lane-container");
 
@@ -29,19 +31,19 @@ export class SwimLane extends HTMLElement {
         this.tasks = this.swimLane.querySelector(".tasks");
         this.addTaskBtn = this.swimLane.querySelector(".add-task-btn");
 
-        this.details = { parent: null, dropZone: null, task: null };
+        // this.details = { parent: null, dropZone: null, task: null };
 
-        this.taskDropEvent = new CustomEvent("taskdrop", {
-            detail: this.details,
-        });
+        // this.taskDropEvent = new CustomEvent("taskdrop", {
+        //     detail: this.details,
+        // });
 
-        this.taskAddEvent = new CustomEvent("taskadd", {
-            detail: this.details,
-        });
+        // this.taskAddEvent = new CustomEvent("taskadd", {
+        //     detail: this.details,
+        // });
 
-        this.taskDeleteEvent = new CustomEvent("taskdelete", {
-            detail: this.details,
-        });
+        // this.taskDeleteEvent = new CustomEvent("taskdelete", {
+        //     detail: this.details,
+        // });
     }
 
     connectedCallback() {
@@ -54,13 +56,6 @@ export class SwimLane extends HTMLElement {
         this.swimLane.addEventListener("dragend", (e) => this.dropTask(e));
     }
 
-    swimLaneClicked(e) {
-        this.mouseDownEl = e.target;
-        if (!this.mouseDownEl.matches(".title-input") && this.editingTitle) {
-            this.saveTitle(e);
-        }
-    }
-
     addTask(e) {
         e.stopPropagation();
         let taskItem = document.createElement("task-item");
@@ -69,23 +64,72 @@ export class SwimLane extends HTMLElement {
         taskItem.id = SwimLane.taskIdCount++;
 
         this.tasks.appendChild(taskItem);
-        if (!this.details) {
-            this.details = { parent: null, dropZone: null, task: null };
-        }
-        this.details.parent = this.tasks.parentNode;
-        this.details.dropZone = null;
-        this.details.task = taskItem;
-        this.dispatchEvent(this.taskAddEvent);
+        // if (!this.details) {
+        //     this.details = { parent: null, dropZone: null, task: null };
+        // }
+        // this.details.parent = this.tasks.parentNode;
+        // this.details.dropZone = null;
+        // this.details.task = taskItem;
+        // this.dispatchEvent(this.taskAddEvent);
 
-        taskItem.addEventListener("taskdelete", (e) => {
-            if (!e.target) {
-                this.details.task = e.querySelector(".taskItem");
-                console.log("taskdelete", e.querySelector(".taskItem"));
-            } else {
-                this.details.task = e.target;
-            }
-            this.dispatchEvent(this.taskDeleteEvent);
-        });
+        let parentSwimLane = this.tasks.parentNode.parentNode.host;
+
+        TaskBoardDataService.addTask(parentSwimLane, taskItem);
+
+        // taskItem.addEventListener("taskdelete", (e) => {
+        //     //console.log("e", e);
+        //     if (!e.target) {
+        //         this.details.task = e.querySelector(".taskItem");
+        //         //console.log("taskdelete", e.querySelector(".taskItem"));
+        //     } else {
+        //         this.details.task = e.target;
+        //         this.details.parent = e.detail.parent.parentNode;
+        //     }
+        //     this.dispatchEvent(this.taskDeleteEvent);
+        // });
+    }
+
+    dropTask(e) {
+        e.stopPropagation();
+        let dropZone = SwimLane.dropZone;
+        let task = e.target;
+        let parentTasks = e.target.parentNode;
+        let parentSwimLane = parentTasks.parentNode.parentNode.host;
+
+        // if (!this.details) {
+        //     this.details = { parent: null, dropZone: null, task: null };
+        // }
+
+        // this.details.parent = parentTasks.parentNode;
+        // this.details.dropZone = dropZone;
+        // this.details.task = task;
+        //console.log(dropZone.shadowRoot);
+        if (dropZone.localName === "swim-lane") {
+            let dropZoneTasks = dropZone.shadowRoot.querySelector(".tasks");
+            parentTasks.removeChild(task);
+            dropZoneTasks.appendChild(task);
+            //this.dispatchEvent(this.taskDropEvent);
+            TaskBoardDataService.dropTask(parentSwimLane, dropZone, task);
+        }
+    }
+
+    disconnectedCallback() {
+        this.addTaskBtn.removeEventListener();
+        this.titleDisplay.removeEventListener();
+        this.swimLane.removeEventListener();
+        this.swimLane.removeEventListener();
+    }
+
+    setDropZone(e) {
+        e.stopPropagation();
+        SwimLane.dropZone = e.path.find((p) => p.localName === "swim-lane");
+    }
+
+    swimLaneClicked(e) {
+        let mouseDownEl = e.target;
+        if (!mouseDownEl.matches(".title-input") && this.editingTitle) {
+            this.saveTitle(e);
+        }
     }
 
     editTitle(e) {
@@ -104,41 +148,5 @@ export class SwimLane extends HTMLElement {
 
         this.titleInput.hidden = true;
         this.titleDisplay.hidden = false;
-    }
-
-    setDropZone(e) {
-        e.stopPropagation();
-        SwimLane.dropZone = e.path.find((p) => p.localName === "swim-lane");
-        //console.log(e.path.find((p) => p.localName === "swim-lane"));
-        //console.log(e.target);
-    }
-
-    dropTask(e) {
-        e.stopPropagation();
-        let dropZone = SwimLane.dropZone;
-        let task = e.target;
-        let parentTasks = e.target.parentNode;
-
-        if (!this.details) {
-            this.details = { parent: null, dropZone: null, task: null };
-        }
-
-        this.details.parent = parentTasks.parentNode;
-        this.details.dropZone = dropZone;
-        this.details.task = task;
-        console.log(dropZone.shadowRoot);
-        if (dropZone.localName === "swim-lane") {
-            let dropZoneTasks = dropZone.shadowRoot.querySelector(".tasks");
-            parentTasks.removeChild(task);
-            dropZoneTasks.appendChild(task);
-            this.dispatchEvent(this.taskDropEvent);
-        }
-    }
-
-    disconnectedCallback() {
-        this.addTaskBtn.removeEventListener();
-        this.titleDisplay.removeEventListener();
-        this.swimLane.removeEventListener();
-        this.swimLane.removeEventListener();
     }
 }

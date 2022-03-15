@@ -26,10 +26,11 @@
 // ];
 
 export class TaskBoardDataService {
-    constructor(state) {
+    static state = [];
+    static initilalizeState(state) {
         this.state = state;
     }
-    addSwimLane(id) {
+    static addSwimLane(id) {
         this.state.push({
             id: id,
             name: "New",
@@ -38,36 +39,38 @@ export class TaskBoardDataService {
         console.log("state: ", this.state);
     }
 
-    addTask(parentSwimLane, task) {
-        let parentSwimLaneState = this.state.find(
-            (s) => s.id === parentSwimLane.id
-        );
+    static addTask(parentSwimLane, task) {
+        let parentSwimLaneState = this.getSwimLaneStateById(parentSwimLane.id);
+
         parentSwimLaneState.tasks.push({
             id: task.id,
         });
         console.log("state: ", this.state);
     }
 
-    dropTask(parentSwimLane, dropZone, task) {
-        let parentSwimLaneState = this.state.find(
-            (s) => s.id === parentSwimLane.id
-        );
+    static dropTask(parentSwimLane, dropZone, task) {
+        let parentSwimLaneState = this.getSwimLaneStateById(parentSwimLane.id);
+        let dropZoneState = this.getSwimLaneStateById(dropZone.id);
+
         let taskItem = parentSwimLaneState.tasks.find((t) => t.id === task.id);
-        let dropZoneState = this.state.find((s) => s.id === dropZone.id);
         dropZoneState.tasks.push(taskItem);
+
         parentSwimLaneState.tasks = parentSwimLaneState.tasks.filter(
             (t) => t.id !== task.id
         );
         console.log("state: ", this.state);
     }
 
-    deleteTask(parentSwimLane, task) {
-        let parentSwimLaneState = this.state.find(
-            (s) => s.id === parentSwimLane.id
-        );
+    static deleteTask(parentSwimLane, task) {
+        let parentSwimLaneState = this.getSwimLaneStateById(parentSwimLane.id);
+
         parentSwimLaneState.tasks = parentSwimLaneState.tasks.filter(
             (t) => t.id !== task.id
         );
         console.log("state: ", this.state);
+    }
+
+    static getSwimLaneStateById(id) {
+        return this.state.find((s) => s.id === id);
     }
 }

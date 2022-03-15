@@ -5,7 +5,7 @@ import { TaskBoardDataService } from "./taskBoardDataService.js";
 window.customElements.define("task-item", TaskItem);
 window.customElements.define("swim-lane", SwimLane);
 
-let taskBoardDataService = new TaskBoardDataService([]);
+TaskBoardDataService.initilalizeState([]);
 
 let addSwimLaneButton = document.querySelector(".add-swim-lane-btn");
 let listContainer = document.querySelector(".swim-lanes");
@@ -23,38 +23,38 @@ function addSwimLane(e) {
 
     listContainer.appendChild(swimLane);
 
-    taskBoardDataService.addSwimLane(swimLane.id);
+    TaskBoardDataService.addSwimLane(swimLane.id);
 
-    swimLane.addEventListener("taskadd", (e) => {
-        onTaskAdd(e);
-    });
+    // swimLane.addEventListener("taskadd", (e) => {
+    //     onTaskAdd(e);
+    // });
 
-    swimLane.addEventListener("taskdrop", (e) => {
-        onTaskDrop(e);
-    });
+    // swimLane.addEventListener("taskdrop", (e) => {
+    //     onTaskDrop(e);
+    // });
 
-    swimLane.addEventListener("taskdelete", (e) => {
-        onTaskDelete(e);
-    });
+    // swimLane.addEventListener("taskdelete", (e) => {
+    //     onTaskDelete(e);
+    // });
 }
 
-function onTaskAdd(e) {
-    if (e.detail.parent?.parentNode) {
-        let parentSwimLane = e.detail.parent.parentNode.host;
-        let task = e.detail.task;
-        taskBoardDataService.addTask(parentSwimLane, task);
-    }
-}
+// function onTaskAdd(e) {
+//     if (e.detail.parent?.parentNode) {
+//         let parentSwimLane = e.detail.parent.parentNode.host;
+//         let task = e.detail.task;
+//         TaskBoardDataService.addTask(parentSwimLane, task);
+//     }
+// }
 
-function onTaskDrop(e) {
-    let parentSwimLane = e.detail.parent.parentNode.host;
-    let dropZone = e.detail.dropZone;
-    let task = e.detail.task;
-    taskBoardDataService.dropTask(parentSwimLane, dropZone, task);
-}
+// function onTaskDrop(e) {
+//     let parentSwimLane = e.detail.parent.parentNode.host;
+//     let dropZone = e.detail.dropZone;
+//     let task = e.detail.task;
+//     TaskBoardDataService.dropTask(parentSwimLane, dropZone, task);
+// }
 
-function onTaskDelete(e) {
-    let parentSwimLane = e.detail.parent.parentNode.host;
-    let task = e.detail.task;
-    taskBoardDataService.deleteTask(parentSwimLane, task);
-}
+// function onTaskDelete(e) {
+//     let parentSwimLane = e.detail.parent.parentNode.host;
+//     let task = e.detail.task;
+//     TaskBoardDataService.deleteTask(parentSwimLane, task);
+// }
