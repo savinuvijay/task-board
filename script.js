@@ -24,37 +24,4 @@ function addSwimLane(e) {
     listContainer.appendChild(swimLane);
 
     TaskBoardDataService.addSwimLane(swimLane.id);
-
-    // swimLane.addEventListener("taskadd", (e) => {
-    //     onTaskAdd(e);
-    // });
-
-    // swimLane.addEventListener("taskdrop", (e) => {
-    //     onTaskDrop(e);
-    // });
-
-    // swimLane.addEventListener("taskdelete", (e) => {
-    //     onTaskDelete(e);
-    // });
 }
-
-// function onTaskAdd(e) {
-//     if (e.detail.parent?.parentNode) {
-//         let parentSwimLane = e.detail.parent.parentNode.host;
-//         let task = e.detail.task;
-//         TaskBoardDataService.addTask(parentSwimLane, task);
-//     }
-// }
-
-// function onTaskDrop(e) {
-//     let parentSwimLane = e.detail.parent.parentNode.host;
-//     let dropZone = e.detail.dropZone;
-//     let task = e.detail.task;
-//     TaskBoardDataService.dropTask(parentSwimLane, dropZone, task);
-// }
-
-// function onTaskDelete(e) {
-//     let parentSwimLane = e.detail.parent.parentNode.host;
-//     let task = e.detail.task;
-//     TaskBoardDataService.deleteTask(parentSwimLane, task);
-// }

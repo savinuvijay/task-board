@@ -33,12 +33,6 @@ export class TaskItem extends HTMLElement {
         this.titleDisplay.style.display = "inline";
 
         this.deleteBtn = this.taskItem.querySelector(".delete-btn");
-
-        // this.detail = { parent: null };
-
-        // this.taskDeleteEvent = new CustomEvent("taskdelete", {
-        //     detail: this.detail,
-        // });
     }
 
     connectedCallback() {
@@ -47,6 +41,17 @@ export class TaskItem extends HTMLElement {
         this.titleDisplay.addEventListener("click", (e) => this.editTitle(e));
         this.deleteBtn.addEventListener("click", (e) => this.deleteTask(e));
     }
+
+    deleteTask(e) {
+        e.stopPropagation();
+        if (this.parentNode) {
+            let parentSwimLane = this.parentNode.parentNode.parentNode.host;
+            TaskBoardDataService.deleteTask(parentSwimLane, this);
+            this.parentNode.removeChild(this);
+        }
+    }
+
+    //#region Rename Task
 
     taskClicked(e) {
         this.mouseDownEl = e.target;
@@ -58,17 +63,6 @@ export class TaskItem extends HTMLElement {
     taskDragged(e) {
         if (!this.mouseDownEl.matches(".task-title")) {
             e.preventDefault();
-        }
-    }
-
-    deleteTask(e) {
-        e.stopPropagation();
-        if (this.parentNode) {
-            // this.detail.parent = this.parentNode;
-            let parentSwimLane = this.parentNode.parentNode.parentNode.host;
-            TaskBoardDataService.deleteTask(parentSwimLane, this);
-            this.parentNode.removeChild(this);
-            //this.dispatchEvent(this.taskDeleteEvent);
         }
     }
 
@@ -88,8 +82,9 @@ export class TaskItem extends HTMLElement {
         this.titleDisplay.style.display = "inline";
     }
 
+    //#endregion Rename Task
+
     disconnectedCallback() {
         //console.log("disconnectedCallback", this.shadowRoot);
-        //this.shadowRoot.querySelector(".delete-btn").removeEventListener();
     }
 }
