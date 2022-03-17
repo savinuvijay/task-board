@@ -50,7 +50,7 @@ export class SwimLane extends HTMLElement {
 
         this.tasks.appendChild(taskItem);
 
-        let parentSwimLane = this.tasks.parentNode.parentNode.host;
+        let parentSwimLane = this.shadowRoot.host;
         TaskBoardDataService.addTask(parentSwimLane, taskItem);
     }
 
@@ -59,7 +59,7 @@ export class SwimLane extends HTMLElement {
         let dropZone = SwimLane.dropZone;
         let task = e.target;
         let parentTasks = e.target.parentNode;
-        let parentSwimLane = parentTasks.parentNode.parentNode.host;
+        let parentSwimLane = this.shadowRoot.host;
 
         if (dropZone.localName === "swim-lane") {
             let dropZoneTasks = dropZone.shadowRoot.querySelector(".tasks");

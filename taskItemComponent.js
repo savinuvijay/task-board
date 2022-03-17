@@ -44,10 +44,11 @@ export class TaskItem extends HTMLElement {
 
     deleteTask(e) {
         e.stopPropagation();
-        if (this.parentNode) {
-            let parentSwimLane = this.parentNode.parentNode.parentNode.host;
-            TaskBoardDataService.deleteTask(parentSwimLane, this);
-            this.parentNode.removeChild(this);
+        let task = this;
+        if (task.parentNode) {
+            let parentSwimLane = task.parentNode.parentNode.parentNode.host;
+            TaskBoardDataService.deleteTask(parentSwimLane, task);
+            task.parentNode.removeChild(task);
         }
     }
 
