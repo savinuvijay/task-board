@@ -1,8 +1,8 @@
-import { TaskBoardDataService } from "./taskBoardDataService.js";
+import { TaskBoardDataService } from "../../services/taskBoardDataService.js";
 
 const swimLaneTemplate = document.createElement("template");
 swimLaneTemplate.innerHTML = `
-    <link rel="stylesheet" href="swimLaneStyle.css" />
+    <link rel="stylesheet" href="./components/swimLaneComponent/swimLaneStyle.css" />
     <div class="swim-lane-container">
       <div class="swim-lane-title">
         <input class="title-input" hidden type="text" value="New"/>
@@ -19,8 +19,6 @@ export class SwimLane extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(swimLaneTemplate.content.cloneNode(true));
 
-        this.editingTitle = false;
-
         this.swimLane = this.shadowRoot.querySelector(".swim-lane-container");
 
         this.swimLaneTitle = this.swimLane.querySelector(".swim-lane-title");
@@ -29,6 +27,9 @@ export class SwimLane extends HTMLElement {
 
         this.tasks = this.swimLane.querySelector(".tasks");
         this.addTaskBtn = this.swimLane.querySelector(".add-task-btn");
+
+        // Initialize EditingTitle to false
+        this.editingTitle = false;
     }
 
     connectedCallback() {

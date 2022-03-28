@@ -1,6 +1,6 @@
-import { TaskItem } from "./taskItemComponent.js";
-import { SwimLane } from "./swimLaneComponent.js";
-import { TaskBoardDataService } from "./taskBoardDataService.js";
+import { TaskItem } from "./components/taskItemComponent/taskItemComponent.js";
+import { SwimLane } from "./components/swimLaneComponent/swimLaneComponent.js";
+import { TaskBoardDataService } from "./services/taskBoardDataService.js";
 
 window.customElements.define("task-item", TaskItem);
 window.customElements.define("swim-lane", SwimLane);

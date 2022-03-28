@@ -1,8 +1,7 @@
-import { TaskBoardDataService } from "./taskBoardDataService.js";
+import { TaskBoardDataService } from "../../services/taskBoardDataService.js";
 
 const taskItemTemplate = document.createElement("template");
 taskItemTemplate.innerHTML = `
-    <link rel="stylesheet" href="taskItemStyle.css" />
     <script src="https://kit.fontawesome.com/f0cb7bd73f.js" crossorigin="anonymous"></script>
     <div class="task-item" draggable="true">
         <div class="task-title">
@@ -11,16 +10,14 @@ taskItemTemplate.innerHTML = `
             <div class="delete-btn">X</div>
         </div>
         <textarea class="task-details"></textarea>
-        <!--<button class="delete-btn">Delete</button>-->
     </div>
-`;
+    <link rel="stylesheet" href="./components/taskItemComponent/taskItemStyle.css" />
+    `;
 
 export class TaskItem extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
-        this.editingTitle = false;
-        this.mouseDownEl = null;
         this.shadowRoot.appendChild(taskItemTemplate.content.cloneNode(true));
 
         this.taskItem = this.shadowRoot.querySelector(".task-item");
@@ -33,6 +30,9 @@ export class TaskItem extends HTMLElement {
         this.titleDisplay.style.display = "inline";
 
         this.deleteBtn = this.taskItem.querySelector(".delete-btn");
+
+        this.editingTitle = false;
+        this.mouseDownEl = null;
     }
 
     connectedCallback() {
