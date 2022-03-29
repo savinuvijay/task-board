@@ -2,7 +2,9 @@ import { TaskBoardDataService } from "../../services/taskBoardDataService.js";
 
 const taskItemTemplate = document.createElement("template");
 taskItemTemplate.innerHTML = `
-    <script src="https://kit.fontawesome.com/f0cb7bd73f.js" crossorigin="anonymous"></script>
+    <style>
+        @import url( './components/taskItemComponent/taskItemStyle.css' )
+    </style>
     <div class="task-item" draggable="true">
         <div class="task-title">
             <input class="title-input" type="text" value="New"/>
@@ -11,7 +13,6 @@ taskItemTemplate.innerHTML = `
         </div>
         <textarea class="task-details"></textarea>
     </div>
-    <link rel="stylesheet" href="./components/taskItemComponent/taskItemStyle.css" />
     `;
 
 export class TaskItem extends HTMLElement {

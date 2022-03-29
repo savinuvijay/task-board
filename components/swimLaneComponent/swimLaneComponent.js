@@ -2,14 +2,16 @@ import { TaskBoardDataService } from "../../services/taskBoardDataService.js";
 
 const swimLaneTemplate = document.createElement("template");
 swimLaneTemplate.innerHTML = `
-    <link rel="stylesheet" href="./components/swimLaneComponent/swimLaneStyle.css" />
+    <style>
+        @import url( './components/swimLaneComponent/swimLaneStyle.css' )
+    </style>
     <div class="swim-lane-container">
-      <div class="swim-lane-title">
-        <input class="title-input" hidden type="text" value="New"/>
-        <span class="title-display" >New</span>
-      </div>
-      <div class=tasks></div>
-      <button class="add-task-btn">+</button>
+        <div class="swim-lane-title">
+            <input class="title-input" hidden type="text" value="New"/>
+            <span class="title-display" >New</span>
+        </div>
+        <div class=tasks></div>
+        <button class="add-task-btn">+</button>
     </div>
 `;
 
